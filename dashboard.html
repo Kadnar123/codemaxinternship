@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Manage your published articles, view performance analytics, and draft new blogs." />
+  <title>Author Dashboard | BlogCraft</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo">
+        <span>✍️</span> Blog<span>Craft</span>
+      </a>
+
+      <nav id="nav-links" class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <div id="nav-user-links" style="display: contents;"></div>
+      </nav>
+
+      <div class="nav-actions">
+        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle theme">🌙</button>
+        <div id="nav-auth-actions" style="display: flex; gap: 0.5rem; align-items: center;"></div>
+        <button id="nav-hamburger" class="hamburger-btn" aria-label="Open mobile menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Dashboard Container -->
+  <main class="container" style="flex: 1; padding-bottom: 5rem;">
+    <div class="dashboard-header">
+      <div class="dashboard-title-row">
+        <div>
+          <h1 id="user-greeting" style="font-size: 2rem; font-weight: 800;">Author Dashboard</h1>
+          <p style="color: var(--text-muted); font-size: 0.95rem;">Monitor your writing impact, view metrics, and manage your publications.</p>
+        </div>
+        <a href="create-blog.html" class="btn btn-primary">
+          <span>+</span> Write New Article
+        </a>
+      </div>
+
+      <!-- Quick Metrics Grid -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">📚</div>
+          <div>
+            <div class="stat-number" id="stat-total-posts">0</div>
+            <div class="stat-label">Total Articles</div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">👁️</div>
+          <div>
+            <div class="stat-number" id="stat-total-views">0</div>
+            <div class="stat-label">Total Views</div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">❤️</div>
+          <div>
+            <div class="stat-number" id="stat-total-likes">0</div>
+            <div class="stat-label">Total Likes</div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">📝</div>
+          <div>
+            <div class="stat-number" id="stat-total-drafts">0</div>
+            <div class="stat-label">Drafts</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Management Table Section -->
+    <section>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+        <h2 style="font-size: 1.35rem; font-weight: 700;">Your Published & Draft Articles</h2>
+      </div>
+
+      <!-- Responsive Data Table -->
+      <div class="table-responsive">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Category</th>
+              <th>Status</th>
+              <th>Views</th>
+              <th>Likes</th>
+              <th>Published</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="posts-table-body">
+            <!-- Dynamically populated by js/dashboard.js -->
+          </tbody>
+        </table>
+
+        <!-- Empty State Container -->
+        <div id="dashboard-empty-state" style="display: none; text-align: center; padding: 3.5rem 1.5rem; color: var(--text-muted);">
+          <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">✍️</div>
+          <h3>You haven't written any articles yet</h3>
+          <p style="margin-bottom: 1.5rem;">Share your knowledge, tutorials, and experiences with the community!</p>
+          <a href="create-blog.html" class="btn btn-primary">Create Your First Post</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-bottom">
+      <p>&copy; 2026 BlogCraft. Frontend Internship Project.</p>
+    </div>
+  </footer>
+
+  <script src="js/storage.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

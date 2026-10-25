@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="BlogCraft - A responsive modern frontend blog application interface built with HTML5, CSS3, and JavaScript." />
+  <title>BlogCraft | Discover Inspiring Stories & Ideas</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- =========================================================================
+       Navigation Header
+       ========================================================================= -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo">
+        <span>✍️</span> Blog<span>Craft</span>
+      </a>
+
+      <!-- Desktop & Mobile Navigation Links -->
+      <nav id="nav-links" class="nav-links" aria-label="Main Navigation">
+        <a href="index.html" class="nav-link active">Home</a>
+        <div id="nav-user-links" style="display: contents;"></div>
+      </nav>
+
+      <!-- User Auth & Theme Actions -->
+      <div class="nav-actions">
+        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle theme">🌙</button>
+        <div id="nav-auth-actions" style="display: flex; gap: 0.5rem; align-items: center;"></div>
+        <button id="nav-hamburger" class="hamburger-btn" aria-label="Open mobile menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       Hero Section
+       ========================================================================= -->
+  <section class="hero">
+    <div class="container hero-content">
+      <span class="badge" style="margin-bottom: 1rem;">Frontend Development Project</span>
+      <h1 class="hero-title">
+        Ideas, Insights & <span class="gradient-text">Modern Web Craft</span>
+      </h1>
+      <p class="hero-subtitle">
+        Explore in-depth tutorials, frontend best practices, UI design patterns, and engineering insights curated by developers.
+      </p>
+      <div class="hero-cta">
+        <a href="#feed-section" class="btn btn-primary">Browse Articles</a>
+        <a href="create-blog.html" class="btn btn-outline">Start Writing →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       Main Content & Blog Feed
+       ========================================================================= -->
+  <main class="container" id="feed-section" style="padding-top: 1rem;">
+    <!-- Feed Toolbar: Search & Category Chips -->
+    <div class="feed-controls">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input 
+          type="search" 
+          id="search-input" 
+          class="search-input" 
+          placeholder="Search by topic, title, or tag..." 
+          aria-label="Search articles"
+        />
+      </div>
+
+      <div class="category-chips" id="category-chips" role="tablist" aria-label="Category Filters">
+        <button class="chip-btn active" data-category="All">All Topics</button>
+        <button class="chip-btn" data-category="Technology">Technology</button>
+        <button class="chip-btn" data-category="Design">Design</button>
+        <button class="chip-btn" data-category="Development">Development</button>
+      </div>
+    </div>
+
+    <!-- Active Filter Counter -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+      <span id="results-count" style="font-size: 0.9rem; color: var(--text-muted); font-weight: 500;">
+        Loading articles...
+      </span>
+    </div>
+
+    <!-- Responsive Articles Grid -->
+    <div class="blog-grid" id="posts-grid">
+      <!-- Injected via js/home.js -->
+    </div>
+
+    <!-- Newsletter CTA Section -->
+    <section style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 3rem 2rem; text-align: center; margin-bottom: 5rem; box-shadow: var(--shadow-sm);">
+      <h2 style="font-size: 1.85rem; margin-bottom: 0.5rem;">Stay ahead in web development</h2>
+      <p style="color: var(--text-muted); max-width: 520px; margin: 0 auto 1.5rem;">
+        Get weekly frontend tutorials, code architecture guides, and UI breakdowns delivered right to your inbox.
+      </p>
+      <form onsubmit="event.preventDefault(); showToast('Subscribed successfully! Thank you.', 'success'); this.reset();" style="display: flex; max-width: 460px; margin: 0 auto; gap: 0.5rem; flex-wrap: wrap;">
+        <input type="email" placeholder="Enter your email address" required class="form-control" style="flex: 1; min-width: 240px;" />
+        <button type="submit" class="btn btn-primary">Subscribe</button>
+      </form>
+    </section>
+  </main>
+
+  <!-- =========================================================================
+       Footer
+       ========================================================================= -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="index.html" class="brand-logo">
+            <span>✍️</span> Blog<span>Craft</span>
+          </a>
+          <p class="footer-desc">
+            A modern, responsive frontend application interface demonstrating semantic HTML5, adaptive CSS layouts, and vanilla JavaScript state management.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Pages</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home Feed</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="register.html">Register</a></li>
+            <li><a href="dashboard.html">Author Dashboard</a></li>
+            <li><a href="create-blog.html">Create Article</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Frontend Pillars</h4>
+          <ul class="footer-links">
+            <li><a href="#feed-section">HTML5 Semantic Architecture</a></li>
+            <li><a href="#feed-section">CSS3 Variables & Grid</a></li>
+            <li><a href="#feed-section">JavaScript DOM & Storage</a></li>
+            <li><a href="#feed-section">Accessible & Mobile First</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 BlogCraft. Frontend Internship Project. Built with clean HTML, CSS & JavaScript.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/storage.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/home.js"></script>
+</body>
+</html>

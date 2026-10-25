@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Create and publish new blog articles with BlogCraft's interactive editor." />
+  <title>Create New Blog | BlogCraft</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo">
+        <span>✍️</span> Blog<span>Craft</span>
+      </a>
+
+      <nav id="nav-links" class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <div id="nav-user-links" style="display: contents;"></div>
+      </nav>
+
+      <div class="nav-actions">
+        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle theme">🌙</button>
+        <div id="nav-auth-actions" style="display: flex; gap: 0.5rem; align-items: center;"></div>
+        <button id="nav-hamburger" class="hamburger-btn" aria-label="Open mobile menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Editor Container -->
+  <main class="container" style="flex: 1;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; flex-wrap: wrap; gap: 1rem;">
+      <div>
+        <h1 id="editor-heading" style="font-size: 2rem; font-weight: 800;">Create New Article</h1>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Compose your post, configure media, and publish to the community.</p>
+      </div>
+      <div style="display: flex; gap: 0.75rem; align-items: center;">
+        <span class="badge" id="word-count-badge">0 words</span>
+        <span class="badge" id="read-time-badge">1 min read</span>
+      </div>
+    </div>
+
+    <!-- Form & Layout Grid -->
+    <form id="blog-editor-form">
+      <div class="editor-layout">
+        <!-- Main Writing Column -->
+        <div class="editor-card">
+          <div class="form-group">
+            <label class="form-label" for="post-title">Article Title *</label>
+            <input 
+              type="text" 
+              id="post-title" 
+              class="form-control" 
+              placeholder="e.g. Building High-Performance Web Applications in 2026" 
+              required 
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="post-excerpt">Short Summary / Excerpt</label>
+            <input 
+              type="text" 
+              id="post-excerpt" 
+              class="form-control" 
+              placeholder="A brief 1-2 sentence hook displayed in feed cards..." 
+            />
+            <div class="form-help">Displayed in search results and social previews.</div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="post-content">Article Content *</label>
+            <textarea 
+              id="post-content" 
+              class="form-control" 
+              rows="14" 
+              placeholder="Write your article markdown or plain text here...&#10;&#10;### Subheading&#10;Write insightful sections with clean paragraphs." 
+              required
+            ></textarea>
+          </div>
+        </div>
+
+        <!-- Sidebar / Publishing Settings Column -->
+        <div>
+          <div class="editor-card" style="margin-bottom: 1.5rem;">
+            <h3 style="font-size: 1.15rem; margin-bottom: 1rem;">Publishing Settings</h3>
+
+            <div class="form-group">
+              <label class="form-label" for="post-category">Category</label>
+              <select id="post-category" class="form-control">
+                <option value="Technology">Technology</option>
+                <option value="Design">Design</option>
+                <option value="Development">Development</option>
+                <option value="Tutorial">Tutorial</option>
+                <option value="Career">Career</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="post-tags">Tags (comma-separated)</label>
+              <input 
+                type="text" 
+                id="post-tags" 
+                class="form-control" 
+                placeholder="JavaScript, CSS, Career" 
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="post-image-url">Cover Image URL</label>
+              <input 
+                type="url" 
+                id="post-image-url" 
+                class="form-control" 
+                placeholder="https://images.unsplash.com/..." 
+              />
+              <div class="form-help">Paste any direct image link for live preview.</div>
+
+              <!-- Live Preview -->
+              <div class="image-preview-box" id="image-preview">
+                <span>No cover image selected</span>
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1.5rem;">
+              <button type="submit" class="btn btn-primary btn-block">🚀 Publish Article</button>
+              <button type="button" id="save-draft-btn" class="btn btn-outline btn-block">💾 Save as Draft</button>
+              <a href="dashboard.html" class="btn btn-outline btn-block btn-sm" style="text-align: center;">Cancel</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-bottom">
+      <p>&copy; 2026 BlogCraft. Frontend Internship Project.</p>
+    </div>
+  </footer>
+
+  <script src="js/storage.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/create-blog.js"></script>
+</body>
+</html>
