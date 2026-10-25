@@ -74,6 +74,7 @@ A complete frontend blog application built with vanilla **HTML5**, **CSS3**, and
 - **Theme Switching**: Built-in Light and Dark modes with persistent storage.
 - **Interactive Feedback**: Custom toast notifications for actions (publishing, liking, logging in, errors).
 - **Accessible & Visual Aesthetics**: Clean typography, card hover elevations, category badges, and smooth transitions.
+- **Blog CRUD**: Signed-in authors can create and publish or save drafts, read published articles, edit their own articles, and delete them from the dashboard. Article data is stored in the browser's `localStorage`; the dashboard does not expose other authors' articles for editing or deletion.
 
 ---
 

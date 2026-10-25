@@ -27,23 +27,38 @@ document.addEventListener('DOMContentLoaded', () => {
   const urlParams = new URLSearchParams(window.location.search);
   const editPostId = urlParams.get('id');
   let isEditMode = false;
+  const currentUser = window.blogStorage.getCurrentUser();
+
+  if (!currentUser) {
+    showToast('Please log in before creating or editing an article.', 'error');
+    setTimeout(() => {
+      window.location.href = 'login.html';
+    }, 800);
+    return;
+  }
 
   if (editPostId) {
     const existingPost = window.blogStorage.getPostById(editPostId);
-    if (existingPost) {
-      isEditMode = true;
-      if (pageHeading) pageHeading.textContent = 'Edit Blog Post';
-
-      titleInput.value = existingPost.title || '';
-      categorySelect.value = existingPost.category || 'Technology';
-      excerptInput.value = existingPost.excerpt || '';
-      contentInput.value = existingPost.content || '';
-      imageInput.value = existingPost.coverImage || '';
-      tagsInput.value = (existingPost.tags || []).join(', ');
-
-      updateImagePreview(existingPost.coverImage);
-      updateMetrics();
+    if (!existingPost || !window.blogStorage.isPostOwnedByUser(editPostId, currentUser)) {
+      showToast('This article does not exist or you do not have permission to edit it.', 'error');
+      setTimeout(() => {
+        window.location.href = 'dashboard.html';
+      }, 800);
+      return;
     }
+
+    isEditMode = true;
+    if (pageHeading) pageHeading.textContent = 'Edit Blog Post';
+
+    titleInput.value = existingPost.title || '';
+    categorySelect.value = existingPost.category || 'Technology';
+    excerptInput.value = existingPost.excerpt || '';
+    contentInput.value = existingPost.content || '';
+    imageInput.value = existingPost.coverImage || '';
+    tagsInput.value = (existingPost.tags || []).join(', ');
+
+    updateImagePreview(existingPost.coverImage);
+    updateMetrics();
   }
 
   // Cover image URL live preview
@@ -125,12 +140,6 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    const currentUser = window.blogStorage.getCurrentUser() || {
-      id: 'guest-author',
-      name: 'Guest Author',
-      email: 'author@blogcraft.com'
-    };
-
     const postPayload = {
       title,
       category,
@@ -148,7 +157,11 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     if (isEditMode) {
-      window.blogStorage.updatePost(editPostId, postPayload);
+      const updatedPost = window.blogStorage.updatePost(editPostId, postPayload);
+      if (!updatedPost) {
+        showToast('This article could not be found and was not updated.', 'error');
+        return;
+      }
       showToast('Article updated successfully!', 'success');
     } else {
       window.blogStorage.createPost(postPayload);

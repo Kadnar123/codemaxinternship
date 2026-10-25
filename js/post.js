@@ -18,7 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const post = window.blogStorage.getPostById(postId);
-  if (!post) {
+  if (
+    !post ||
+    (post.status === 'draft' && !window.blogStorage.isPostOwnedByUser(postId, window.blogStorage.getCurrentUser()))
+  ) {
     renderNotFound(container);
     return;
   }

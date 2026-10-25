@@ -33,13 +33,9 @@ function renderDashboard() {
   const currentUser = window.blogStorage.getCurrentUser();
   const allPosts = window.blogStorage.getPosts();
 
-  // Filter posts created by current user or demo fallback
-  const userPosts = allPosts.filter(
-    (p) => p.author?.email?.toLowerCase() === currentUser.email.toLowerCase() || p.author?.id === currentUser.id
+  const displayPosts = allPosts.filter((post) =>
+    window.blogStorage.isPostOwnedByUser(post.id, currentUser)
   );
-
-  // If user is demo developer and has no personal posts yet, include initial posts for showcase
-  const displayPosts = userPosts.length > 0 ? userPosts : allPosts;
 
   // Calculate stats
   const totalPosts = displayPosts.length;
@@ -111,9 +107,17 @@ function renderDashboard() {
     btn.addEventListener('click', () => {
       const postId = btn.getAttribute('data-id');
       if (confirm('Are you sure you want to delete this blog post? This action cannot be undone.')) {
-        window.blogStorage.deletePost(postId);
-        showToast('Article deleted successfully.', 'success');
-        renderDashboard();
+        if (!window.blogStorage.isPostOwnedByUser(postId, currentUser)) {
+          showToast('You can only delete your own articles.', 'error');
+          return;
+        }
+
+        if (window.blogStorage.deletePost(postId)) {
+          showToast('Article deleted successfully.', 'success');
+          renderDashboard();
+        } else {
+          showToast('This article could not be found.', 'error');
+        }
       }
     });
   });

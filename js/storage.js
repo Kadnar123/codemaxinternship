@@ -158,6 +158,18 @@ class StorageManager {
     return posts.find((p) => p.id === id);
   }
 
+  isPostOwnedByUser(id, user) {
+    if (!user) return false;
+
+    const post = this.getPostById(id);
+    if (!post || !post.author) return false;
+
+    return (
+      (user.id && post.author.id === user.id) ||
+      (user.email && post.author.email?.toLowerCase() === user.email.toLowerCase())
+    );
+  }
+
   savePosts(posts) {
     localStorage.setItem(STORAGE_KEYS.POSTS, JSON.stringify(posts));
   }
@@ -187,8 +199,11 @@ class StorageManager {
   }
 
   deletePost(id) {
-    const posts = this.getPosts().filter((p) => p.id !== id);
-    this.savePosts(posts);
+    const posts = this.getPosts();
+    const remainingPosts = posts.filter((p) => p.id !== id);
+    if (remainingPosts.length === posts.length) return false;
+
+    this.savePosts(remainingPosts);
     return true;
   }
 
